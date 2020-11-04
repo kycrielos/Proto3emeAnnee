@@ -15,15 +15,9 @@ public class PlayerController : MonoBehaviour
     public float MaxSpeed;
     public float ActualSpeed;
     public bool CanMove = true;
-    public float DashForce;
 
     //Physics
     private Rigidbody PlayerRigidbody;
-
-    private IEnumerator coroutine;
-    public float DashDuration;
-    public float DashSpeed;
-    public float SpeedBoost;
 
     // Start is called before the first frame update
     void Start()
@@ -35,23 +29,6 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         PlayerMovement();
-        if (Input.GetButtonDown("Fire1"))
-        {
-            PlayerDash();
-        }
-    }
-
-    void PlayerDash()
-    {
-        coroutine = WaitDash(DashDuration);
-        StartCoroutine(coroutine);
-    }
-
-    IEnumerator WaitDash(float waitTime)
-    {
-        SpeedBoost *= DashSpeed;
-        yield return new WaitForSeconds(waitTime);
-        SpeedBoost /= DashSpeed;
     }
 
     void PlayerMovement()
@@ -86,7 +63,7 @@ public class PlayerController : MonoBehaviour
             ActualSpeed = 0;
         }
 
-        MoveDirection = new Vector3(Movementx, 0, Movementy) * ActualSpeed * SpeedBoost;   
+        MoveDirection = new Vector3(Movementx, 0, Movementy) * ActualSpeed;   
 
         //Deplace Le Joueur
         Vector3 newVel = MoveDirection;
