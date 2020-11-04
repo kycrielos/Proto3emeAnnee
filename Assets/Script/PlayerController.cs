@@ -7,22 +7,15 @@ public class PlayerController : MonoBehaviour
 {
     //Movement
     Vector3 MoveDirection;
-    Vector3 JumpDirection;
     private float Movementx;
     private float Movementy;
+    private float Mousex;
+    private float Mousey;
     public float SpeedReduction;
     public float MaxSpeed;
     public float ActualSpeed;
     public float JumpForce;
-    private float JumpActualForce;
-    public float JumpDecreaseSpeed;
     public bool CanMove = true;
-
-    //Rotation
-    private float Mousex;
-    private float Mousey;
-    public float AngularVelocity = 4f;
-    private float Rotation;
 
     //Physics
     private Rigidbody PlayerRigidbody;
@@ -47,11 +40,6 @@ public class PlayerController : MonoBehaviour
         //Recupere les Input
         Movementx = Input.GetAxisRaw("Horizontal") * SpeedReduction;
         Movementy = Input.GetAxisRaw("Vertical");
-
-        //Gere la rotation
-        Mousex = (Mousex + AngularVelocity * Input.GetAxis("Mouse X")) % 360f;
-        PlayerRigidbody.rotation = Quaternion.AngleAxis(Mousex, Vector3.up);
-        Rotation = transform.eulerAngles.y;
 
         //Avance Diagonale
         if (Movementx != 0 && Movementy > 0)
@@ -79,38 +67,22 @@ public class PlayerController : MonoBehaviour
             ActualSpeed = 0;
         }
 
-        IsGroundedVerif();
-
+        //Gere le Jump
         if (Input.GetButtonDown("Jump"))
         {
-            //Gere le Jump
+            IsGroundedVerif();
+
             if (IsGrounded)
             {
-                JumpActualForce = JumpForce;
-                //PlayerRigidbody.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
-                Debug.Log("Cheat");
+                PlayerRigidbody.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
             }
         }
 
-        if (!IsGrounded)
-        {
-            if (JumpActualForce > 0)
-            {
-                JumpActualForce -= JumpDecreaseSpeed;
-            }
-            else
-            {
-                JumpActualForce = 0;
-            }
-        }
 
-        JumpDirection = new Vector3(0, JumpActualForce, 0);
-
-        MoveDirection = new Vector3(Movementx, 0, Movementy) * ActualSpeed;
-        MoveDirection = Quaternion.Euler(0, Rotation, 0) * MoveDirection;
+        MoveDirection = new Vector3(Movementx, 0, Movementy) * ActualSpeed;   
 
         //Deplace Le Joueur
-        Vector3 newVel = MoveDirection + JumpDirection;
+        Vector3 newVel = MoveDirection;
         PlayerRigidbody.velocity = newVel;
     }
 
