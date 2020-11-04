@@ -14,15 +14,19 @@ public class PlayerController : MonoBehaviour
     public float SpeedReduction;
     public float MaxSpeed;
     public float ActualSpeed;
+    public float JumpForce;
     public bool CanMove = true;
 
     //Physics
     private Rigidbody PlayerRigidbody;
+    public bool IsGrounded;
+    private Collider PlayerCollider;
 
     // Start is called before the first frame update
     void Start()
     {
         PlayerRigidbody = GetComponent<Rigidbody>();
+        PlayerCollider = GetComponent<Collider>();
     }
 
     // Update is called once per frame
@@ -63,10 +67,40 @@ public class PlayerController : MonoBehaviour
             ActualSpeed = 0;
         }
 
+        //Gere le Jump
+        if (Input.GetButtonDown("Jump"))
+        {
+            IsGroundedVerif();
+
+            if (IsGrounded)
+            {
+                PlayerRigidbody.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
+            }
+        }
+
+
         MoveDirection = new Vector3(Movementx, 0, Movementy) * ActualSpeed;   
 
         //Deplace Le Joueur
         Vector3 newVel = MoveDirection;
         PlayerRigidbody.velocity = newVel;
+    }
+
+    public void IsGroundedVerif()
+    {
+        //Lance un raycast pour checker la distance entre le joueur et le sol
+        RaycastHit hit;
+        if (Physics.Raycast(PlayerCollider.bounds.center, -Vector3.up, out hit, PlayerCollider.bounds.extents.y + 0.1f))
+        {
+            Debug.DrawRay(PlayerCollider.bounds.center, -Vector3.up * hit.distance, Color.red);
+            if (hit.collider.tag == "Ground")
+            {
+                IsGrounded = true;
+            }
+        }
+        else
+        {
+            IsGrounded = false;
+        }
     }
 }
