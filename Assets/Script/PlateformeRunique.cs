@@ -5,19 +5,61 @@ using UnityEngine;
 public class PlateformeRunique : MonoBehaviour
 {
     public int Value;
-    public Transform Position1;
-    public Transform Position2;
+
+    public float Speed = 1;
+    public float Duration;
+    private float Timer;
+
+
 
     // Update is called once per frame
     void Update()
     {
+        if (Value == 0)
+        {
+            Timer = 0;
+        }
+
         if (Value == 1)
         {
-            transform.position = Position1.transform.position;
+            Timer += Time.deltaTime;
+            if (Timer < Duration)
+            {
+                transform.Translate(Vector3.down * Time.deltaTime * Speed);
+            }
+            else
+            {
+                Value = 0;
+            }
         }
+
         else if (Value == 2)
         {
-            transform.position = Position2.transform.position;
+            Timer += Time.deltaTime;
+            if (Timer < Duration)
+            {
+                transform.Translate(Vector3.down * Time.deltaTime * Speed);
+            }
+            else
+            {
+                Value = 0;
+            }
+
+        }
+
+        else if (Value == 3)
+        {
+            Timer += Time.deltaTime;
+            if (Timer < Duration)
+            {
+                transform.Translate(Vector3.down * Time.deltaTime * Speed);
+            }
+            else
+            {
+                Value = 0;
+            }
+
         }
     }
+
 }
