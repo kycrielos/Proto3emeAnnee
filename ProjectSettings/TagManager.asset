@@ -6,8 +6,6 @@ TagManager:
   tags:
   - Ground
   - SphereCompanion
-  - SphereCompanionTrigger
-  - CompanionExitTrigger
   layers:
   - Default
   - TransparentFX

@@ -18,16 +18,17 @@ public class PlayerController : MonoBehaviour
     public float JumpDecreaseSpeed;
     public bool CanMove = true;
 
-    //Rotation
-    private float Mousex;
-    private float Mousey;
-    public float AngularVelocity = 4f;
-    private float Rotation;
 
     //Physics
     private Rigidbody PlayerRigidbody;
     public bool IsGrounded;
     private Collider PlayerCollider;
+
+    //Camera
+    public GameObject Cam;
+
+    //Vie
+    public int HP;
 
     // Start is called before the first frame update
     void Start()
@@ -45,16 +46,11 @@ public class PlayerController : MonoBehaviour
     void PlayerMovement()
     {
         //Recupere les Input
-        Movementx = Input.GetAxisRaw("Horizontal") * SpeedReduction;
+        Movementx = Input.GetAxisRaw("Horizontal");
         Movementy = Input.GetAxisRaw("Vertical");
 
-        //Gere la rotation
-        Mousex = (Mousex + AngularVelocity * Input.GetAxis("Mouse X")) % 360f;
-        PlayerRigidbody.rotation = Quaternion.AngleAxis(Mousex, Vector3.up);
-        Rotation = transform.eulerAngles.y;
-
         //Avance Diagonale
-        if (Movementx != 0 && Movementy > 0)
+        if (Movementx !=  0 && Movementy > 0)
         {
             ActualSpeed = MaxSpeed * (Mathf.Sqrt(2) / 2);
         }
@@ -104,14 +100,20 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        Vector3 controlRight = Vector3.Cross(Cam.transform.up, Cam.transform.forward);
+        Vector3 controlForward = Vector3.Cross(Cam.transform.right, Vector3.up);
+
         JumpDirection = new Vector3(0, JumpActualForce, 0);
 
-        MoveDirection = new Vector3(Movementx, 0, Movementy) * ActualSpeed;
-        MoveDirection = Quaternion.Euler(0, Rotation, 0) * MoveDirection;
+        MoveDirection = (Movementx * controlRight + controlForward * Movementy) * ActualSpeed;
 
         //Deplace Le Joueur
         Vector3 newVel = MoveDirection + JumpDirection;
         PlayerRigidbody.velocity = newVel;
+        if (Movementx != 0 || Movementy != 0)
+        {
+            transform.rotation = Quaternion.LookRotation(MoveDirection);
+        }
     }
 
     public void IsGroundedVerif()

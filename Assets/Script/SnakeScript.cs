@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class SnakeScript : MonoBehaviour
 {
-    public Transform Player;
+    public Transform player;
+
+    public float speed;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,9 +16,12 @@ public class SnakeScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Player != null)
+        if (player != null)
         {
-            transform.LookAt(new Vector3(Player.position.x, transform.position.y , Player.position.z));
+            Vector3 targetDirection = new Vector3(player.position.x, transform.position.y, player.position.z) - transform.position;
+            float singleStep = speed * Time.deltaTime;
+            transform.rotation = Quaternion.LookRotation(Vector3.RotateTowards(transform.forward, targetDirection, singleStep, 0));
+            //transform.LookAt(new Vector3(player.position.x, transform.position.y , player.position.z));
         }
     }
 }
