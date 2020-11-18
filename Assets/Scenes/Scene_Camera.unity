@@ -278,9 +278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a551bcd552221ac4b9c538bf69a83b5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpeedReduction: 1
-  MaxSpeed: 10
-  ActualSpeed: 0.1
+  MaxSpeed: 15
   JumpForce: 40
   JumpDecreaseSpeed: 1
   CanMove: 1
@@ -299,7 +297,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 542fc9747d9145e4a89cce7f54bf4919, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravityScale: 30
+  gravityScale: 37
 --- !u!54 &543262479
 Rigidbody:
   m_ObjectHideFlags: 0

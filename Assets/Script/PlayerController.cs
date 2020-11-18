@@ -10,9 +10,8 @@ public class PlayerController : MonoBehaviour
     Vector3 JumpDirection;
     private float Movementx;
     private float Movementy;
-    public float SpeedReduction;
     public float MaxSpeed;
-    public float ActualSpeed;
+    private float ActualSpeed;
     public float JumpForce;
     private float JumpActualForce;
     public float JumpDecreaseSpeed;
@@ -49,25 +48,15 @@ public class PlayerController : MonoBehaviour
         Movementx = Input.GetAxisRaw("Horizontal");
         Movementy = Input.GetAxisRaw("Vertical");
 
-        //Avance Diagonale
-        if (Movementx !=  0 && Movementy > 0)
+        //Diagonale
+        if (Movementx !=  0 && Movementy != 0)
         {
             ActualSpeed = MaxSpeed * (Mathf.Sqrt(2) / 2);
         }
-        //Recule Diagonale
-        else if (Movementx != 0 && Movementy < 0)
-        {
-            ActualSpeed = MaxSpeed * (Mathf.Sqrt(2) / 2) * SpeedReduction;
-        }
-        //Avance ou Pas de cote
-        else if (Movementx != 0 || Movementy > 0)
+        //Avance ou recule
+        else if (Movementx != 0 || Movementy != 0)
         {
             ActualSpeed = MaxSpeed;
-        }
-        //Recule
-        else if (Movementy < 0)
-        {
-            ActualSpeed = MaxSpeed * SpeedReduction;
         }
         //Ne Bouge Pas
         else
@@ -83,8 +72,6 @@ public class PlayerController : MonoBehaviour
             if (IsGrounded)
             {
                 JumpActualForce = JumpForce;
-                //PlayerRigidbody.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
-                Debug.Log("Cheat");
             }
         }
 

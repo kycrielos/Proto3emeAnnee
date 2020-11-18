@@ -19,13 +19,22 @@ public class CameraController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
+    private void Update()
+    {
+        Mousex = (Mousex + AngularVelocity * Input.GetAxis("Mouse X")) % 360f;
+        Mousey = (Mousey + AngularVelocity * Input.GetAxis("Mouse Y")) % 360f;
+
+        if (Input.GetButtonDown("RecenterCamera"))
+        {
+            Mousey = 20;
+            Mousex = Player.transform.eulerAngles.y;
+        }
+    }
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         transform.position = Player.transform.position;
         //Recupere les inputs
-        Mousex = (Mousex + AngularVelocity * Input.GetAxis("Mouse X")) % 360f;
-        Mousey = (Mousey + AngularVelocity * Input.GetAxis("Mouse Y")) % 360f;
 
         //Limite de la rotation
         if (!(Mousey < 60))
