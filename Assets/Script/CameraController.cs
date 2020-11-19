@@ -41,9 +41,9 @@ public class CameraController : MonoBehaviour
         {
             Mousey = 60;
         }
-        if (!(Mousey > 0))
+        if (!(Mousey > -60))
         {
-            Mousey = 0;
+            Mousey = -60;
         }
 
         //Gere la rotation
