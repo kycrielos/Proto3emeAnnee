@@ -320,7 +320,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1484303194}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.39977026, y: 0.13, z: -12.860426}
+  m_LocalPosition: {x: 19.1, y: 4.74, z: 3.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -350,7 +350,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1536928951}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.39977026, y: 14.9, z: -12.860426}
+  m_LocalPosition: {x: -27.5, y: 4.9, z: -43.73}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -385,13 +385,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1993979011}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c9f0fc7f21f9c94cbc0f03d5971322a, type: 3}
+  m_Script: {fileID: 11500000, guid: 9ffc3e4e5323993498165f09734f3413, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Haut: {fileID: 1536928952}
-  Bas: {fileID: 1484303195}
-  Monte: 1
-  Speed: 1
+  Position1: {fileID: 1536928952}
+  Position2: {fileID: 1484303195}
+  GoPosition1: 1
+  Speed: 10
 --- !u!65 &1993979013
 BoxCollider:
   m_ObjectHideFlags: 0

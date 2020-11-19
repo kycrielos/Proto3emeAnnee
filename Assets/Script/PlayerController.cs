@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody PlayerRigidbody;
     public bool IsGrounded;
     private Collider PlayerCollider;
+    private CustomGravity Gravity;
 
     //Camera
     public GameObject Cam;
@@ -34,6 +35,7 @@ public class PlayerController : MonoBehaviour
     {
         PlayerRigidbody = GetComponent<Rigidbody>();
         PlayerCollider = GetComponent<Collider>();
+        Gravity = GetComponent<CustomGravity>();
     }
 
     // Update is called once per frame
@@ -66,10 +68,11 @@ public class PlayerController : MonoBehaviour
 
         IsGroundedVerif();
 
-        if (Input.GetButtonDown("Jump"))
+        //Gere le Jump
+        if (IsGrounded)
         {
-            //Gere le Jump
-            if (IsGrounded)
+            Gravity.enabled = false;
+            if (Input.GetButtonDown("Jump"))
             {
                 JumpActualForce = JumpForce;
             }
@@ -77,6 +80,7 @@ public class PlayerController : MonoBehaviour
 
         if (!IsGrounded)
         {
+            Gravity.enabled = true;
             if (JumpActualForce > 0)
             {
                 JumpActualForce -= JumpDecreaseSpeed;

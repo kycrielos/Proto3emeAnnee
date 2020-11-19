@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlaterformMovementScript : MonoBehaviour
+public class PlaterformMovementVerticalScript : MonoBehaviour
 {
     public Transform Haut;
     public Transform Bas;
