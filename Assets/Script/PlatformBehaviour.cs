@@ -10,6 +10,8 @@ public class PlatformBehaviour : MonoBehaviour
     private Transform targetPos;
     private bool changeTarget;
 
+    private GameObject Player;
+
     void Start()
     {
         targetPos = pos1;
@@ -32,10 +34,5 @@ public class PlatformBehaviour : MonoBehaviour
         }
 
         transform.position = Vector3.MoveTowards(transform.position, targetPos.position, speed * Time.deltaTime);
-    }
-
-    private void OnCollisionStay(Collision collision)
-    {
-        
     }
 }
