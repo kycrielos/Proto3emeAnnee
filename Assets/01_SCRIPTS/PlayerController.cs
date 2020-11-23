@@ -126,7 +126,7 @@ public class PlayerController : MonoBehaviour
 
     public void Jump()
     {
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButton("Jump"))
         {
             IsJumping = true;
             JumpActualForce = JumpForce;
