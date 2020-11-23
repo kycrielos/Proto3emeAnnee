@@ -16,9 +16,6 @@ public class PlayerController : MonoBehaviour
     private float JumpActualForce;
     public float JumpDecreaseSpeed;
     public bool CanMove = true;
-    private bool IsJumping;
-    public float JumpDelay;
-    private float JumpDelayTimer;
 
 
     //Physics
@@ -72,29 +69,15 @@ public class PlayerController : MonoBehaviour
         IsGroundedVerif();
 
         //Gere le Jump
-
         if (IsGrounded)
         {
-            JumpDelayTimer = 0;
-            if (IsJumping)
-            {
-                IsJumping = false;
-            }
             Gravity.enabled = false;
-            Jump();
-        }
-
-        //Laisse un délai au joueur dans le vide pour sauter
-        if (!IsJumping && !IsGrounded)
-        {
-            JumpDelayTimer += Time.deltaTime;
-            if (JumpDelayTimer <= JumpDelay)
+            if (Input.GetButtonDown("Jump"))
             {
-                Jump();
+                JumpActualForce = JumpForce;
             }
         }
 
-        //FRalenti la vitesse de saut
         if (!IsGrounded)
         {
             Gravity.enabled = true;
@@ -121,15 +104,6 @@ public class PlayerController : MonoBehaviour
         if (Movementx != 0 || Movementy != 0)
         {
             transform.rotation = Quaternion.LookRotation(MoveDirection);
-        }
-    }
-
-    public void Jump()
-    {
-        if (Input.GetButton("Jump"))
-        {
-            IsJumping = true;
-            JumpActualForce = JumpForce;
         }
     }
 
