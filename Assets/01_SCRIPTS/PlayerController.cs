@@ -140,7 +140,7 @@ public class PlayerController : MonoBehaviour
         if (Physics.Raycast(PlayerCollider.bounds.center, -Vector3.up, out hit, PlayerCollider.bounds.extents.y + 0.1f))
         {
             Debug.DrawRay(PlayerCollider.bounds.center, -Vector3.up * hit.distance, Color.red);
-            if (hit.collider.tag == "Ground" || hit.collider.tag == "MovablePlateform")
+            if (hit.collider.tag == "Ground")
             {
                 IsGrounded = true;
             }
@@ -150,6 +150,7 @@ public class PlayerController : MonoBehaviour
             IsGrounded = false;
         }
     }
+<<<<<<< HEAD:Assets/01_SCRIPTS/PlayerController.cs
 
     private void OnCollisionStay(Collision collision)
     {
@@ -165,4 +166,6 @@ public class PlayerController : MonoBehaviour
             transform.parent = null;
         }
     }
+=======
+>>>>>>> parent of 7231b2c... Rename_Prefabs:Assets/Script/PlayerController.cs
 }
