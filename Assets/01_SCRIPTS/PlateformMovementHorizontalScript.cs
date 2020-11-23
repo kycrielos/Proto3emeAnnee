@@ -26,7 +26,7 @@ public class PlateformMovementHorizontalScript : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, Position2.position, step);
         }
 
-        if (DistanceTo <= 0.4)
+        if (DistanceTo <= 0.05)
         {
             GoPosition1 = !GoPosition1;
         }

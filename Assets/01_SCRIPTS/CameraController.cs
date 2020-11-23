@@ -24,11 +24,11 @@ public class CameraController : MonoBehaviour
         Mousex = (Mousex + AngularVelocity * Input.GetAxis("Mouse X")) % 360f;
         Mousey = (Mousey + AngularVelocity * Input.GetAxis("Mouse Y")) % 360f;
 
-        if (Input.GetButtonDown("RecenterCamera"))
+        /*if (Input.GetButtonDown("RecenterCamera"))
         {
             Mousey = 20;
             Mousex = Player.transform.eulerAngles.y;
-        }
+        }*/
     }
     // Update is called once per frame
     void FixedUpdate()

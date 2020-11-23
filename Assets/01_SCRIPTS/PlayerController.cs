@@ -5,6 +5,10 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 
 {
+    //Input
+    private float Inputx;
+    private float Inputy;
+
     //Movement
     Vector3 MoveDirection;
     Vector3 JumpDirection;
@@ -12,10 +16,13 @@ public class PlayerController : MonoBehaviour
     private float Movementy;
     public float MaxSpeed;
     private float ActualSpeed;
+    public float Acceleration;
+    public float Deceleration;
+
+    //Jump
     public float JumpForce;
     private float JumpActualForce;
     public float JumpDecreaseSpeed;
-    public bool CanMove = true;
     private bool IsJumping;
     public float JumpDelay;
     private float JumpDelayTimer;
@@ -50,8 +57,41 @@ public class PlayerController : MonoBehaviour
     void PlayerMovement()
     {
         //Recupere les Input
-        Movementx = Input.GetAxisRaw("Horizontal");
-        Movementy = Input.GetAxisRaw("Vertical");
+        Inputx = Input.GetAxisRaw("Horizontal");
+        Inputy = Input.GetAxisRaw("Vertical");
+
+        if (Inputx != 0 && Movementx <= 1 && Movementx >= -1)
+        {
+            Movementx += Mathf.Sqrt(1 - Mathf.Pow(Mathf.Abs(Inputx) - 1, 2)) * Time.deltaTime * Inputx / Mathf.Abs(Inputx) * Acceleration;
+        }
+        else if (Inputx != 0)
+        {
+            Movementx = Inputx;
+        }
+        else if (Movementx >= 0.01f || Movementx <= -0.01f)
+        {
+            Movementx -= Mathf.Sqrt(1 - Mathf.Pow(Mathf.Abs(Movementx) - 1, 2)) * Time.deltaTime * Movementx / Mathf.Abs(Movementx) * Deceleration;
+        }
+        else
+        {
+            Movementx = 0;
+        }
+        if (Inputy != 0 && Movementy <= 1 && Movementy >= -1)
+        {
+            Movementy += Mathf.Sqrt(1 - Mathf.Pow(Mathf.Abs(Inputy) - 1, 2)) * Time.deltaTime * Inputy / Mathf.Abs(Inputy) * Acceleration;
+        }
+        else if (Inputy != 0)
+        {
+            Movementy = Inputy;
+        }
+        else if (Movementy >= 0.01f || Movementy <= -0.01f)
+        {
+            Movementy -= Mathf.Sqrt(1 - Mathf.Pow(Mathf.Abs(Movementy) - 1, 2)) * Time.deltaTime * Movementy / Mathf.Abs(Movementy) * Deceleration;
+        }
+        else
+        {
+            Movementy = 0;
+        }
 
         //Diagonale
         if (Movementx !=  0 && Movementy != 0)
@@ -80,7 +120,7 @@ public class PlayerController : MonoBehaviour
             {
                 IsJumping = false;
             }
-            Gravity.enabled = false;
+            //Gravity.enabled = false;
             Jump();
         }
 
@@ -97,7 +137,7 @@ public class PlayerController : MonoBehaviour
         //FRalenti la vitesse de saut
         if (!IsGrounded)
         {
-            Gravity.enabled = true;
+            //Gravity.enabled = true;
             if (JumpActualForce > 0)
             {
                 JumpActualForce -= JumpDecreaseSpeed;
@@ -140,9 +180,14 @@ public class PlayerController : MonoBehaviour
         if (Physics.Raycast(PlayerCollider.bounds.center, -Vector3.up, out hit, PlayerCollider.bounds.extents.y + 0.1f))
         {
             Debug.DrawRay(PlayerCollider.bounds.center, -Vector3.up * hit.distance, Color.red);
-            if (hit.collider.tag == "Ground" || hit.collider.tag == "MovablePlateform")
+            if (hit.collider.tag == "Ground" || hit.collider.tag == "Fire")
             {
                 IsGrounded = true;
+            }
+            else if (hit.collider.tag == "MovablePlateform")
+            {
+                IsGrounded = true;
+                transform.parent = hit.collider.transform;
             }
         }
         else
@@ -153,9 +198,13 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
-        if (collision.gameObject.tag == "MovablePlateform")
+        /*if (collision.gameObject.tag == "MovablePlateform")
         {
             transform.parent = collision.transform;
+        }*/
+        if (collision.gameObject.tag == "Fire")
+        {
+            GetComponent<Renderer>().material.color = Color.red;
         }
     }
     private void OnCollisionExit(Collision collision)
@@ -163,6 +212,10 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "MovablePlateform")
         {
             transform.parent = null;
+        }
+        if (collision.gameObject.tag == "Fire")
+        {
+            GetComponent<Renderer>().material.color = Color.gray;
         }
     }
 }
