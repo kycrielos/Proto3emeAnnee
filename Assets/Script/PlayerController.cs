@@ -114,7 +114,7 @@ public class PlayerController : MonoBehaviour
         if (Physics.Raycast(PlayerCollider.bounds.center, -Vector3.up, out hit, PlayerCollider.bounds.extents.y + 0.1f))
         {
             Debug.DrawRay(PlayerCollider.bounds.center, -Vector3.up * hit.distance, Color.red);
-            if (hit.collider.tag == "Ground")
+            if (hit.collider.tag == "Ground" || hit.collider.tag == "MovablePlateform")
             {
                 IsGrounded = true;
             }
@@ -122,6 +122,21 @@ public class PlayerController : MonoBehaviour
         else
         {
             IsGrounded = false;
+        }
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.tag == "MovablePlateform")
+        {
+            transform.parent = collision.transform;
+        }
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag == "MovablePlateform")
+        {
+            transform.parent = null;
         }
     }
 }
