@@ -58,7 +58,5 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
-*.json
+ProjectSettings/Packages/com.unity.probuilder/Settings.json
 *.meta
-Assets/_WORKSPACE(Local--DontPush)
-
