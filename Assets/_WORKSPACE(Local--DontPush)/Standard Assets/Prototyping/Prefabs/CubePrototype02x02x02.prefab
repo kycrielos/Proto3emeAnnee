@@ -39,15 +39,9 @@ MeshFilter:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD:Assets/_WORKSPACE(Local--DontPush)/Standard Assets/Prototyping/Prefabs/CubePrototype02x02x02.prefab
   m_GameObject: {fileID: 100000}
   m_Mesh: {fileID: 4300002, guid: df4796b594b970842b69211cb0078c5d, type: 3}
 --- !u!23 &2300000
-=======
-  m_GameObject: {fileID: 7298637244179640587}
-  m_Mesh: {fileID: -8936327813770012726, guid: 5d517e31e1af8ae42adf1fca3f2c0e26, type: 3}
---- !u!23 &9099817267082612958
->>>>>>> parent of f3147e5... Merge branch 'CodeTest' of https://github.com/kycrielos/Proto3emeAnnee into CodeTest:Assets/props/sol/sol.prefab
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -64,11 +58,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-<<<<<<< HEAD:Assets/_WORKSPACE(Local--DontPush)/Standard Assets/Prototyping/Prefabs/CubePrototype02x02x02.prefab
   - {fileID: 2100000, guid: 76ff537c8e1a84345868e6aeee938ab3, type: 2}
-=======
-  - {fileID: 5561349426305759274, guid: 5d517e31e1af8ae42adf1fca3f2c0e26, type: 3}
->>>>>>> parent of f3147e5... Merge branch 'CodeTest' of https://github.com/kycrielos/Proto3emeAnnee into CodeTest:Assets/props/sol/sol.prefab
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
