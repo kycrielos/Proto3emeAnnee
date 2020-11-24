@@ -57,16 +57,28 @@ public class PlayerController : MonoBehaviour
     void PlayerMovement()
     {
         //Recupere les Input
-        Inputx = Input.GetAxisRaw("Horizontal") + Time.deltaTime* Input.GetAxisRaw("Horizontal");
-        Inputy = Input.GetAxisRaw("Vertical") + Time.deltaTime* Input.GetAxisRaw("Vertical");
+        Inputx = Input.GetAxisRaw("Horizontal");
+        Inputy = Input.GetAxisRaw("Vertical");
 
-        if (Inputx != 0 && Movementx <= 1 && Movementx >= -1)
+        if (Inputx != 0)
         {
-            Movementx += Mathf.Sqrt(1 - Mathf.Pow(Mathf.Abs(Inputx) - 1, 2)) * Time.deltaTime * Inputx / Mathf.Abs(Inputx) * Acceleration;
-        }
-        else if (Inputx != 0)
-        {
-            Movementx = Inputx;
+            if (Movementx <= 1 && Movementx >= -1)
+            {
+                Movementx += Mathf.Sqrt(1 - Mathf.Pow(Mathf.Abs(Inputx) - 1, 2)) * Time.deltaTime * Inputx / Mathf.Abs(Inputx) * Acceleration;
+            }
+            else 
+            {
+                Movementx = Inputx;
+            }
+
+            if (Inputy != 0)
+            {
+                ActualSpeed = MaxSpeed * (Mathf.Sqrt(2) / 2);
+            }
+            else
+            {
+                ActualSpeed = MaxSpeed;
+            }
         }
         else if (Movementx >= 0.01f || Movementx <= -0.01f)
         {
@@ -76,14 +88,22 @@ public class PlayerController : MonoBehaviour
         {
             Movementx = 0;
         }
-        if (Inputy != 0 && Movementy <= 1 && Movementy >= -1)
+
+        if (Inputy != 0)
         {
-            Movementy += Mathf.Sqrt(1 - Mathf.Pow(Mathf.Abs(Inputy) - 1, 2)) * Time.deltaTime * Inputy / Mathf.Abs(Inputy) * Acceleration;
-        }
-        else if (Inputy != 0)
-        {
-            Movementy = Inputy;
-        }
+            if (Movementy <= 1 && Movementy >= -1)
+            {
+                Movementy += Mathf.Sqrt(1 - Mathf.Pow(Mathf.Abs(Inputy) - 1, 2)) * Time.deltaTime * Inputy / Mathf.Abs(Inputy) * Acceleration;
+            }
+            else
+            {
+                Movementy = Inputy;
+            }
+            if (Inputx == 0)
+            {
+                ActualSpeed = MaxSpeed;
+            }
+        }  
         else if (Movementy >= 0.01f || Movementy <= -0.01f)
         {
             Movementy -= Mathf.Sqrt(1 - Mathf.Pow(Mathf.Abs(Movementy) - 1, 2)) * Time.deltaTime * Movementy / Mathf.Abs(Movementy) * Deceleration;
@@ -91,22 +111,6 @@ public class PlayerController : MonoBehaviour
         else
         {
             Movementy = 0;
-        }
-
-        //Diagonale
-        if (Movementx !=  0 && Movementy != 0)
-        {
-            ActualSpeed = MaxSpeed * (Mathf.Sqrt(2) / 2);
-        }
-        //Avance ou recule
-        else if (Movementx != 0 || Movementy != 0)
-        {
-            ActualSpeed = MaxSpeed;
-        }
-        //Ne Bouge Pas
-        else
-        {
-            ActualSpeed = 0;
         }
 
         IsGroundedVerif();
@@ -151,7 +155,7 @@ public class PlayerController : MonoBehaviour
         Vector3 controlRight = Vector3.Cross(Cam.transform.up, Cam.transform.forward);
         Vector3 controlForward = Vector3.Cross(Cam.transform.right, Vector3.up);
 
-        JumpDirection = new Vector3(0, JumpActualForce, 0) + Time.deltaTime*JumpDirection;
+        JumpDirection = new Vector3(0, JumpActualForce, 0);
 
         MoveDirection = (Movementx * controlRight + controlForward * Movementy) * ActualSpeed;
 
