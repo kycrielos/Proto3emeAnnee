@@ -138,13 +138,13 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        //FRalenti la vitesse de saut
+        //Ralenti la vitesse de saut
         if (!IsGrounded)
         {
             //Gravity.enabled = true;
             if (JumpActualForce > 0)
             {
-                JumpActualForce -= JumpDecreaseSpeed;
+                JumpActualForce -= JumpDecreaseSpeed*Time.deltaTime;
             }
             else
             {
