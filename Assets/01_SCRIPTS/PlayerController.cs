@@ -57,8 +57,8 @@ public class PlayerController : MonoBehaviour
     void PlayerMovement()
     {
         //Recupere les Input
-        Inputx = Input.GetAxisRaw("Horizontal")*Time.deltaTime*20;
-        Inputy = Input.GetAxisRaw("Vertical") * Time.deltaTime* 20;
+        Inputx = Input.GetAxisRaw("Horizontal") + Time.deltaTime* Input.GetAxisRaw("Horizontal");
+        Inputy = Input.GetAxisRaw("Vertical") + Time.deltaTime* Input.GetAxisRaw("Vertical");
 
         if (Inputx != 0 && Movementx <= 1 && Movementx >= -1)
         {
@@ -151,7 +151,7 @@ public class PlayerController : MonoBehaviour
         Vector3 controlRight = Vector3.Cross(Cam.transform.up, Cam.transform.forward);
         Vector3 controlForward = Vector3.Cross(Cam.transform.right, Vector3.up);
 
-        JumpDirection = new Vector3(0, JumpActualForce, 0);
+        JumpDirection = new Vector3(0, JumpActualForce, 0) + Time.deltaTime*JumpDirection;
 
         MoveDirection = (Movementx * controlRight + controlForward * Movementy) * ActualSpeed;
 
