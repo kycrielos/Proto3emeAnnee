@@ -57,8 +57,8 @@ public class PlayerController : MonoBehaviour
     void PlayerMovement()
     {
         //Recupere les Input
-        Inputx = Input.GetAxisRaw("Horizontal");
-        Inputy = Input.GetAxisRaw("Vertical");
+        Inputx = Input.GetAxisRaw("Horizontal")*Time.deltaTime*20;
+        Inputy = Input.GetAxisRaw("Vertical") * Time.deltaTime* 20;
 
         if (Inputx != 0 && Movementx <= 1 && Movementx >= -1)
         {
