@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8027996627033616796}
   - component: {fileID: 6218291986671385274}
   m_Layer: 0
-  m_Name: Cube (1)
+  m_Name: Phantome
   m_TagString: MovablePlateform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,9 +28,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 0.5, z: 2}
-  m_Children: []
-  m_Father: {fileID: 9175611707876195280}
-  m_RootOrder: 0
+  m_Children:
+  - {fileID: 9175611707876195280}
+  m_Father: {fileID: 9175611706507979798}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8027996627033616796
 MeshFilter:
@@ -138,7 +139,7 @@ Transform:
   m_Children:
   - {fileID: 9175611707805423417}
   - {fileID: 9175611706410840264}
-  - {fileID: 9175611707876195280}
+  - {fileID: 1118780599848030599}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -278,9 +279,8 @@ Transform:
   m_GameObject: {fileID: 9175611707876195281}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1118780599848030599}
-  m_Father: {fileID: 9175611706507979798}
-  m_RootOrder: 2
+  m_LocalScale: {x: 0.5, y: 2, z: 0.5}
+  m_Children: []
+  m_Father: {fileID: 1118780599848030599}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
