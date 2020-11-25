@@ -32,26 +32,35 @@ public class PlayerController : MonoBehaviour
     private Rigidbody PlayerRigidbody;
     public bool IsGrounded;
     private Collider PlayerCollider;
-    private CustomGravity Gravity;
 
     //Camera
     public GameObject Cam;
 
+    //Fall
+    public float FallingDuration;
+    public float TickPerSecond = 1;
+    public float MinimumDamagePerTick = 1;
+
     //Vie
-    public int HP;
+    public float MaxHP;
+    public float HP;
+    public Transform Spawnpoint;
+    public float Damage;
 
     // Start is called before the first frame update
     void Start()
     {
         PlayerRigidbody = GetComponent<Rigidbody>();
         PlayerCollider = GetComponent<Collider>();
-        Gravity = GetComponent<CustomGravity>();
+        HP = MaxHP;
     }
 
     // Update is called once per frame
     void Update()
     {
+        IsDead();
         PlayerMovement();
+        FallingDamage();
     }
 
     void PlayerMovement()
@@ -200,6 +209,42 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void IsDead()
+    {
+        if (HP <= 0)
+        {
+            transform.position = Spawnpoint.position;
+            transform.rotation = Spawnpoint.rotation;
+            HP = MaxHP;
+        }
+    }
+
+    public void FallingDamage()
+    {
+        if (JumpActualForce <= 0 && !IsGrounded)
+        {
+            FallingDuration += Time.deltaTime;
+        }
+
+        if (IsGrounded)
+        {
+            while (FallingDuration  >= 1 / TickPerSecond)
+            {
+                Damage += MinimumDamagePerTick * Mathf.Round(FallingDuration* TickPerSecond);
+                FallingDuration -= 1 / TickPerSecond;
+                Debug.Log(Damage);
+            }
+            FallingDuration = 0;
+            Damaged();
+        }
+    }
+
+    public void Damaged()
+    {
+        HP -= Damage;
+        Damage = 0;
+    }
+
     private void OnCollisionStay(Collision collision)
     {
         /*if (collision.gameObject.tag == "MovablePlateform")
@@ -220,6 +265,13 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "Fire")
         {
             GetComponent<Renderer>().material.color = Color.gray;
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Checkpoint")
+        {
+            Spawnpoint = GetComponentInChildren<Transform>();
         }
     }
 }
