@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour
             {
                 Movementx += Mathf.Sqrt(1 - Mathf.Pow(Mathf.Abs(Inputx) - 1, 2)) * Time.deltaTime * Inputx / Mathf.Abs(Inputx) * Acceleration;
             }
-            else 
+            else
             {
                 Movementx = Inputx;
             }
@@ -112,7 +112,7 @@ public class PlayerController : MonoBehaviour
             {
                 ActualSpeed = MaxSpeed;
             }
-        }  
+        }
         else if (Movementy >= 0.01f || Movementy <= -0.01f)
         {
             Movementy -= Mathf.Sqrt(1 - Mathf.Pow(Mathf.Abs(Movementy) - 1, 2)) * Time.deltaTime * Movementy / Mathf.Abs(Movementy) * Deceleration;
@@ -153,7 +153,7 @@ public class PlayerController : MonoBehaviour
             //Gravity.enabled = true;
             if (JumpActualForce > 0)
             {
-                JumpActualForce -= JumpDecreaseSpeed*Time.deltaTime;
+                JumpActualForce -= JumpDecreaseSpeed * Time.deltaTime;
             }
             else
             {
@@ -228,9 +228,9 @@ public class PlayerController : MonoBehaviour
 
         if (IsGrounded)
         {
-            while (FallingDuration  >= 1 / TickPerSecond)
+            while (FallingDuration >= 1 / TickPerSecond)
             {
-                Damage += MinimumDamagePerTick * Mathf.Round(FallingDuration* TickPerSecond);
+                Damage += MinimumDamagePerTick * Mathf.Round(FallingDuration * TickPerSecond);
                 FallingDuration -= 1 / TickPerSecond;
                 Debug.Log(Damage);
             }
