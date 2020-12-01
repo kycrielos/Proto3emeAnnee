@@ -22,16 +22,15 @@ public class PlayerController : MonoBehaviour
     //Jump
     public float JumpForce;
     private float JumpActualForce;
-    public float JumpDecreaseSpeed;
     private bool IsJumping;
     public float JumpDelay;
     private float JumpDelayTimer;
 
 
     //Physics
-    private Rigidbody PlayerRigidbody;
-    public bool IsGrounded;
     private Collider PlayerCollider;
+    public float GravityScale;
+    public CharacterController controller;
 
     //Camera
     public GameObject Cam;
@@ -47,10 +46,13 @@ public class PlayerController : MonoBehaviour
     public Transform Spawnpoint;
     public float Damage;
 
+    public float GravityForce = 9.87f;
+    float turnSmoothVelocity;
+    public float turnSmoothTime = 0.1f;
     // Start is called before the first frame update
     void Start()
     {
-        PlayerRigidbody = GetComponent<Rigidbody>();
+        controller = GetComponent<CharacterController>();
         PlayerCollider = GetComponent<Collider>();
         HP = MaxHP;
     }
@@ -73,7 +75,7 @@ public class PlayerController : MonoBehaviour
         {
             if (Movementx <= 1 && Movementx >= -1)
             {
-                Movementx += Mathf.Sqrt(1 - Mathf.Pow(Mathf.Abs(Inputx) - 1, 2)) * Time.deltaTime * Inputx / Mathf.Abs(Inputx) * Acceleration;
+                Movementx += Mathf.Sqrt(1 - Mathf.Pow(Mathf.Abs(Inputx) - 1, 2)) * Inputx / Mathf.Abs(Inputx) * Acceleration;
             }
             else
             {
@@ -91,7 +93,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (Movementx >= 0.01f || Movementx <= -0.01f)
         {
-            Movementx -= Mathf.Sqrt(1 - Mathf.Pow(Mathf.Abs(Movementx) - 1, 2)) * Time.deltaTime * Movementx / Mathf.Abs(Movementx) * Deceleration;
+            Movementx -= Mathf.Sqrt(1 - Mathf.Pow(Mathf.Abs(Movementx) - 1, 2)) * Movementx / Mathf.Abs(Movementx) * Deceleration;
         }
         else
         {
@@ -102,7 +104,7 @@ public class PlayerController : MonoBehaviour
         {
             if (Movementy <= 1 && Movementy >= -1)
             {
-                Movementy += Mathf.Sqrt(1 - Mathf.Pow(Mathf.Abs(Inputy) - 1, 2)) * Time.deltaTime * Inputy / Mathf.Abs(Inputy) * Acceleration;
+                Movementy += Mathf.Sqrt(1 - Mathf.Pow(Mathf.Abs(Inputy) - 1, 2)) * Inputy / Mathf.Abs(Inputy) * Acceleration;
             }
             else
             {
@@ -115,19 +117,18 @@ public class PlayerController : MonoBehaviour
         }
         else if (Movementy >= 0.01f || Movementy <= -0.01f)
         {
-            Movementy -= Mathf.Sqrt(1 - Mathf.Pow(Mathf.Abs(Movementy) - 1, 2)) * Time.deltaTime * Movementy / Mathf.Abs(Movementy) * Deceleration;
+            Movementy -= Mathf.Sqrt(1 - Mathf.Pow(Mathf.Abs(Movementy) - 1, 2)) * Movementy / Mathf.Abs(Movementy) * Deceleration;
         }
         else
         {
             Movementy = 0;
         }
 
-        IsGroundedVerif();
-
         //Gere le Jump
 
-        if (IsGrounded)
+        if (controller.isGrounded)
         {
+            JumpActualForce = 0;
             JumpDelayTimer = 0;
             if (IsJumping)
             {
@@ -138,7 +139,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //Laisse un délai au joueur dans le vide pour sauter
-        if (!IsJumping && !IsGrounded)
+        if (!IsJumping && !controller.isGrounded)
         {
             JumpDelayTimer += Time.deltaTime;
             if (JumpDelayTimer <= JumpDelay)
@@ -148,32 +149,34 @@ public class PlayerController : MonoBehaviour
         }
 
         //Ralenti la vitesse de saut
-        if (!IsGrounded)
+        if (!controller.isGrounded)
         {
-            //Gravity.enabled = true;
-            if (JumpActualForce > 0)
+            if (JumpActualForce > -GravityForce)
             {
-                JumpActualForce -= JumpDecreaseSpeed * Time.deltaTime;
+                JumpActualForce -= GravityScale * Time.deltaTime;
             }
             else
             {
-                JumpActualForce = 0;
+                JumpActualForce = -GravityForce;
             }
         }
 
-        Vector3 controlRight = Vector3.Cross(Cam.transform.up, Cam.transform.forward);
-        Vector3 controlForward = Vector3.Cross(Cam.transform.right, Vector3.up);
-
-        JumpDirection = new Vector3(0, JumpActualForce, 0);
-
-        MoveDirection = (Movementx * controlRight + controlForward * Movementy) * ActualSpeed;
+        JumpDirection = new Vector3(0, JumpActualForce * Time.deltaTime, 0);
+        MoveDirection = new Vector3(Movementx, 0, Movementy).normalized;
 
         //Deplace Le Joueur
-        Vector3 newVel = MoveDirection + JumpDirection;
-        PlayerRigidbody.velocity = newVel;
-        if (Movementx != 0 || Movementy != 0)
+        if (MoveDirection.magnitude >= 0.1f)
         {
-            transform.rotation = Quaternion.LookRotation(MoveDirection);
+            float targetAngle = Mathf.Atan2(MoveDirection.x, MoveDirection.z) * Mathf.Rad2Deg + Cam.transform.eulerAngles.y;
+            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+            transform.rotation = Quaternion.Euler(0f, angle, 0f);
+
+            Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+            controller.Move(moveDir * ActualSpeed * Time.deltaTime + JumpDirection);
+        }
+        else
+        {
+            controller.Move(JumpDirection);
         }
     }
 
@@ -183,29 +186,6 @@ public class PlayerController : MonoBehaviour
         {
             IsJumping = true;
             JumpActualForce = JumpForce;
-        }
-    }
-
-    public void IsGroundedVerif()
-    {
-        //Lance un raycast pour checker la distance entre le joueur et le sol
-        RaycastHit hit;
-        if (Physics.Raycast(PlayerCollider.bounds.center, -Vector3.up, out hit, PlayerCollider.bounds.extents.y + 0.1f))
-        {
-            Debug.DrawRay(PlayerCollider.bounds.center, -Vector3.up * hit.distance, Color.red);
-            if (hit.collider.tag == "Ground" || hit.collider.tag == "Fire")
-            {
-                IsGrounded = true;
-            }
-            else if (hit.collider.tag == "MovablePlateform")
-            {
-                IsGrounded = true;
-                transform.parent = hit.collider.transform;
-            }
-        }
-        else
-        {
-            IsGrounded = false;
         }
     }
 
@@ -221,12 +201,12 @@ public class PlayerController : MonoBehaviour
 
     public void FallingDamage()
     {
-        if (JumpActualForce <= 0 && !IsGrounded)
+        if (JumpActualForce <= 0 && !controller.isGrounded)
         {
             FallingDuration += Time.deltaTime;
         }
 
-        if (IsGrounded)
+        if (controller.isGrounded)
         {
             while (FallingDuration >= 1 / TickPerSecond)
             {

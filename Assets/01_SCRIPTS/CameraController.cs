@@ -23,9 +23,7 @@ public class CameraController : MonoBehaviour
     {
         Mousex = (Mousex + AngularVelocity * Input.GetAxis("Mouse X")) % 360f;
         Mousey = (Mousey + AngularVelocity * Input.GetAxis("Mouse Y")) % 360f;
-    }
-    void FixedUpdate()
-    {
+
         transform.position = Player.transform.position;
 
         //Limite de la rotation
@@ -40,5 +38,9 @@ public class CameraController : MonoBehaviour
 
         //Gere la rotation
         transform.eulerAngles = new Vector3(Mousey, Mousex, 0);
+    }
+    void FixedUpdate()
+    {
+       
     }
 }
