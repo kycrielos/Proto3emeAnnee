@@ -29,4 +29,11 @@ public class SnakeBulletscript : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "BulletTrigger")
+        {
+            Destroy(this.gameObject, 0.5f);
+        }
+    }
 }

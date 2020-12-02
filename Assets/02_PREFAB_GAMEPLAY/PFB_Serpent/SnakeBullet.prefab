@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  Speed: 5
+  Speed: 8
   Damage: 0
 --- !u!54 &6467020007880385131
 Rigidbody:

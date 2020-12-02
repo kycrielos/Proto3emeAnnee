@@ -10,6 +10,7 @@ public class SnakeBulletTrigger : MonoBehaviour
     {
         if (other.tag == "Player")
         {
+            Target.position = other.transform.position;
             Snake.target = Target;
         }
     }
