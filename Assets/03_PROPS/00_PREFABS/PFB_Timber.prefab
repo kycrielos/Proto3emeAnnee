@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6555625113280874084}
   m_Layer: 0
-  m_Name: Timber
+  m_Name: PFB_Timber
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -112,6 +112,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 1.0735
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 941af81590cbd7145b7bf5672b5e83e6,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 90d9fb4347a744345b30a278b8e4d335, type: 2}
     - target: {fileID: 919132149155446097, guid: 941af81590cbd7145b7bf5672b5e83e6,
         type: 3}
       propertyPath: m_Name
@@ -202,6 +207,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 1.0735
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 941af81590cbd7145b7bf5672b5e83e6,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 90d9fb4347a744345b30a278b8e4d335, type: 2}
     - target: {fileID: 919132149155446097, guid: 941af81590cbd7145b7bf5672b5e83e6,
         type: 3}
       propertyPath: m_Name
@@ -292,6 +302,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 1.0735
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 941af81590cbd7145b7bf5672b5e83e6,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 90d9fb4347a744345b30a278b8e4d335, type: 2}
     - target: {fileID: 919132149155446097, guid: 941af81590cbd7145b7bf5672b5e83e6,
         type: 3}
       propertyPath: m_Name
@@ -382,6 +397,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 1.0735
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 941af81590cbd7145b7bf5672b5e83e6,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 90d9fb4347a744345b30a278b8e4d335, type: 2}
     - target: {fileID: 919132149155446097, guid: 941af81590cbd7145b7bf5672b5e83e6,
         type: 3}
       propertyPath: m_Name
@@ -472,6 +492,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 1.0735
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 941af81590cbd7145b7bf5672b5e83e6,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 90d9fb4347a744345b30a278b8e4d335, type: 2}
     - target: {fileID: 919132149155446097, guid: 941af81590cbd7145b7bf5672b5e83e6,
         type: 3}
       propertyPath: m_Name
