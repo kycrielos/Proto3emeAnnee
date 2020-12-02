@@ -9,6 +9,7 @@ public class SnakeScript : MonoBehaviour
     public float speed;
 
     public bool AspirationOn;
+    public bool ShootOn;
 
     private float AspirationTimer;
     public float AspirationDuration;
@@ -19,39 +20,72 @@ public class SnakeScript : MonoBehaviour
     private Vector3 SpawnPos;
     public float SpawnDistance;
 
-    bool test;
-    
+    public float Cooldown;
+    private float CdTimer;
+
+
     // Update is called once per frame
     void Update()
     {
         if (player != null)
         {
+            AI();
             if (AspirationOn)
             {
-                AspirationTrigger.SetActive(true);
-                AspirationTimer += Time.deltaTime;
-                if (AspirationTimer >= AspirationDuration)
-                {
-                    AspirationOn = false;
-                    AspirationTrigger.SetActive(false);
-                    AspirationTimer = 0;
-                }
+                Aspiration();
             }
             else
             {
-                Vector3 targetDirection = new Vector3(player.position.x, transform.position.y, player.position.z) - transform.position;
-                float singleStep = speed * Time.deltaTime;
-                transform.rotation = Quaternion.LookRotation(Vector3.RotateTowards(transform.forward, targetDirection, singleStep, 0));
+                FollowPlayer();
             }
-            if (!test)
+
+            if (ShootOn)
             {
                 Shoot();
-                test = true;
+                ShootOn = false;
+                CdTimer = 0;
+            }
+        }
+    }
+    public void AI()
+    {
+        if (!AspirationOn)
+        {
+            CdTimer += Time.deltaTime;
+            if (CdTimer > Cooldown)
+            {
+                if (target != null)
+                {
+                    ShootOn = true;
+                }
+                else
+                {
+                    AspirationOn = true;
+                }
             }
         }
     }
 
-    
+    public void FollowPlayer()
+    {
+        Vector3 targetDirection = new Vector3(player.position.x, transform.position.y, player.position.z) - transform.position;
+        float singleStep = speed * Time.deltaTime;
+        transform.rotation = Quaternion.LookRotation(Vector3.RotateTowards(transform.forward, targetDirection, singleStep, 0));
+    }
+
+
+    public void Aspiration()
+    {
+        AspirationTrigger.SetActive(true);
+        AspirationTimer += Time.deltaTime;
+        if (AspirationTimer >= AspirationDuration)
+        {
+            AspirationOn = false;
+            AspirationTrigger.SetActive(false);
+            AspirationTimer = 0;
+            CdTimer = 0;
+        }
+    }
 
     public void Shoot()
     {
