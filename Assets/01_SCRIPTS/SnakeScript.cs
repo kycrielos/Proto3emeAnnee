@@ -22,7 +22,7 @@ public class SnakeScript : MonoBehaviour
 
     public float Cooldown;
     private float CdTimer;
-
+    public Transform Head;
 
     // Update is called once per frame
     void Update()
@@ -54,6 +54,11 @@ public class SnakeScript : MonoBehaviour
             CdTimer += Time.deltaTime;
             if (CdTimer > Cooldown)
             {
+                /*RaycastHit hit;
+                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity ))
+                {
+
+                }*/
                 if (target != null)
                 {
                     ShootOn = true;
@@ -89,7 +94,7 @@ public class SnakeScript : MonoBehaviour
 
     public void Shoot()
     {
-        SpawnPos = transform.position + transform.forward * SpawnDistance;
+        SpawnPos = Head.position + transform.forward * SpawnDistance;
         Bullet.GetComponent<SnakeBulletscript>().target = target;
         Instantiate(Bullet, SpawnPos, transform.rotation);
     }
