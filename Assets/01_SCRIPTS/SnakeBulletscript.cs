@@ -12,7 +12,7 @@ public class SnakeBulletscript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float step = Speed * Time.deltaTime;
+        float step = Speed * Time.deltaTime * 2;
         transform.position = Vector3.MoveTowards(transform.position, target.position, step);
     }
 
