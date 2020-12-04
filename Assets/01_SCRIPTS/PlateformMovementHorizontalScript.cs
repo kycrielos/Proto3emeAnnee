@@ -10,8 +10,9 @@ public class PlateformMovementHorizontalScript : MonoBehaviour
     public float Speed = 1;
     public float DistanceTo;
 
+
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (GoPosition1)
         {
