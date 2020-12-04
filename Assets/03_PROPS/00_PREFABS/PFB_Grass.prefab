@@ -108,7 +108,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 1
   m_IsActive: 1
 --- !u!4 &3624770750129236883
 Transform:
@@ -334,7 +334,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3638072225695216106}
   m_Layer: 0
-  m_Name: SM_Grass
+  m_Name: PFB_Grass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
