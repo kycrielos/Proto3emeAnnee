@@ -8,6 +8,7 @@ public class SnakeBulletscript : MonoBehaviour
     public float Speed;
     public float Damage;
     private PlayerController Player;
+    bool DamageSecurity;
 
     // Update is called once per frame
     void Update()
@@ -18,16 +19,13 @@ public class SnakeBulletscript : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player" && !DamageSecurity)
         {
             Player = other.gameObject.GetComponent<PlayerController>();
+            DamageSecurity = true;
             Player.Damage += Damage;
-            Player.Damaged();
         }
-        else
-        {
-            Destroy(this.gameObject);
-        }
+        Destroy(this.gameObject);
     }
     private void OnTriggerEnter(Collider other)
     {

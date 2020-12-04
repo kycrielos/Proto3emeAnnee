@@ -82,14 +82,14 @@ public class PlayerController : MonoBehaviour
                 Movementx = Inputx;
             }
 
-            if (Inputy != 0)
+            /*if (Inputy != 0)
             {
                 ActualSpeed = MaxSpeed * (Mathf.Sqrt(2) / 2);
             }
             else
             {
                 ActualSpeed = MaxSpeed;
-            }
+            }*/
         }
         else if (Movementx >= 0.01f || Movementx <= -0.01f)
         {
@@ -128,7 +128,6 @@ public class PlayerController : MonoBehaviour
 
         if (controller.isGrounded)
         {
-            JumpActualForce = 0;
             JumpDelayTimer = 0;
             if (IsJumping)
             {
@@ -227,10 +226,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
-        /*if (collision.gameObject.tag == "MovablePlateform")
-        {
-            transform.parent = collision.transform;
-        }*/
         if (collision.gameObject.tag == "Fire")
         {
             GetComponent<Renderer>().material.color = Color.red;
@@ -238,13 +233,24 @@ public class PlayerController : MonoBehaviour
     }
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.tag == "MovablePlateform")
-        {
-            transform.parent = null;
-        }
         if (collision.gameObject.tag == "Fire")
         {
             GetComponent<Renderer>().material.color = Color.gray;
+        }
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "MovablePlateform")
+        {
+            transform.parent = other.transform;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "MovablePlateform")
+        {
+            transform.parent = null;
         }
     }
     private void OnTriggerEnter(Collider other)

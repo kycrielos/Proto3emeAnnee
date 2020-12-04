@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 632934667644564237}
   m_Layer: 0
-  m_Name: SM_Floor
+  m_Name: PFB_Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,7 +47,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 1
   m_IsActive: 1
 --- !u!4 &3610890980624452190
 Transform:
