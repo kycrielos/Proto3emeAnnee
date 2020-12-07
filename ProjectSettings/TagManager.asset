@@ -8,6 +8,7 @@ TagManager:
   - MovablePlateform
   - Fire
   - BulletTrigger
+  - Checkpoint
   layers:
   - Default
   - TransparentFX
