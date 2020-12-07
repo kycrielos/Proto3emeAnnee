@@ -12,11 +12,19 @@ public class AspirationTriggerScript : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            AspirationTickTimer += Time.deltaTime;
-            if (AspirationTickTimer >= 1 / AspirationTickPerSecond)
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, other.transform.position - transform.position, out hit, Mathf.Infinity))
             {
-                other.GetComponent<PlayerController>().HP -= AspirationDamagePerTick;
-                AspirationTickTimer = 0;
+                Debug.DrawRay(transform.position, (other.transform.position - transform.position) * hit.distance, Color.yellow);
+                if (hit.collider.name == "Player")
+                {
+                    AspirationTickTimer += Time.deltaTime;
+                    if (AspirationTickTimer >= 1 / AspirationTickPerSecond)
+                    {
+                        other.GetComponent<PlayerController>().HP -= AspirationDamagePerTick;
+                        AspirationTickTimer = 0;
+                    }
+                }
             }
         }
     }
