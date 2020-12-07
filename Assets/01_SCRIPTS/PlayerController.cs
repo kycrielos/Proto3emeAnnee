@@ -192,9 +192,11 @@ public class PlayerController : MonoBehaviour
     {
         if (HP <= 0)
         {
+            GetComponent<CharacterController>().enabled = false;
             transform.position = Spawnpoint.position;
             transform.rotation = Spawnpoint.rotation;
             HP = MaxHP;
+            GetComponent<CharacterController>().enabled = true;
         }
     }
 
@@ -257,7 +259,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.tag == "Checkpoint")
         {
-            Spawnpoint = GetComponentInChildren<Transform>();
+            Spawnpoint = other.GetComponentInChildren<Transform>();
         }
     }
 }

@@ -52,20 +52,20 @@ public class SnakeScript : MonoBehaviour
         if (!AspirationOn)
         {
             CdTimer += Time.deltaTime;
-            if (CdTimer > Cooldown)
+            RaycastHit hit;
+            if (CdTimer > Cooldown && Physics.Raycast(transform.position, player.position - transform.position, out hit, Mathf.Infinity))
             {
-                /*RaycastHit hit;
-                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity ))
+                Debug.DrawRay(transform.position, (player.position-transform.position) * hit.distance, Color.yellow);
+                if (hit.collider.name == "Player")
                 {
-
-                }*/
-                if (target != null)
-                {
-                    ShootOn = true;
-                }
-                else
-                {
-                    AspirationOn = true;
+                    if (target != null)
+                    {
+                        ShootOn = true;
+                    }
+                    else
+                    {
+                        AspirationOn = true;
+                    }
                 }
             }
         }
