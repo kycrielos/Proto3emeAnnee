@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5561415370866549152}
   m_Layer: 0
-  m_Name: SM_Stalactite3
+  m_Name: PFB_Stalactite3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,7 +47,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 1
   m_IsActive: 1
 --- !u!4 &5009823309632712843
 Transform:
