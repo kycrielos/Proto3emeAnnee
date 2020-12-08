@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
 
     //Fall
     public float FallingDuration;
-    public float TickPerSecond = 1;
+    public float SecondPerTick = 1;
     public float MinimumDamagePerTick = 1;
 
     //Vie
@@ -55,6 +55,7 @@ public class PlayerController : MonoBehaviour
         controller = GetComponent<CharacterController>();
         PlayerCollider = GetComponent<Collider>();
         HP = MaxHP;
+        SecondPerTick = 1 / SecondPerTick;
     }
 
     // Update is called once per frame
@@ -209,10 +210,10 @@ public class PlayerController : MonoBehaviour
 
         if (controller.isGrounded)
         {
-            while (FallingDuration >= 1 / TickPerSecond)
+            while (FallingDuration >= 1 / SecondPerTick)
             {
-                Damage += MinimumDamagePerTick * Mathf.Round(FallingDuration * TickPerSecond);
-                FallingDuration -= 1 / TickPerSecond;
+                Damage += MinimumDamagePerTick * Mathf.Round(FallingDuration * SecondPerTick);
+                FallingDuration -= 1 / SecondPerTick;
                 Debug.Log(Damage);
             }
             FallingDuration = 0;

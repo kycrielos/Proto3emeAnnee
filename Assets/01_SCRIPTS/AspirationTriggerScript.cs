@@ -41,7 +41,6 @@ public class AspirationTriggerScript : MonoBehaviour
     {
         if (other.tag == "Player" && PlayerVisible)
         {
-            Debug.Log("Bite");
             AspirationTickTimer += Time.deltaTime;
             if (AspirationTickTimer >= 1 / AspirationTickPerSecond)
             {
