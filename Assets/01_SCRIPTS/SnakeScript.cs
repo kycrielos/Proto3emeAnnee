@@ -53,9 +53,9 @@ public class SnakeScript : MonoBehaviour
         {
             CdTimer += Time.deltaTime;
             RaycastHit hit;
-            if (CdTimer > Cooldown && Physics.Raycast(transform.position, player.position - transform.position, out hit, Mathf.Infinity))
+            if (CdTimer > Cooldown && Physics.Raycast(Head.position, player.position - Head.position, out hit, Mathf.Infinity))
             {
-                Debug.DrawRay(transform.position, (player.position-transform.position) * hit.distance, Color.yellow);
+                Debug.DrawRay(Head.position, (player.position-Head.position) * hit.distance, Color.yellow);
                 if (hit.collider.name == "Player")
                 {
                     if (target != null)
