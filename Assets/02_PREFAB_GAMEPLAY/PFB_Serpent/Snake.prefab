@@ -626,7 +626,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3361658302515953184}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -692,8 +692,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f32017e873ae2d94bb6f6624dbb7a548, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AspirationTickPerSecond: 0
-  AspirationDamagePerTick: 0
+  AspirationTickPerSecond: 1
+  AspirationDamagePerTick: 1
+  Head: {fileID: 0}
+  player: {fileID: 0}
 --- !u!1 &3361658303149640645
 GameObject:
   m_ObjectHideFlags: 0
