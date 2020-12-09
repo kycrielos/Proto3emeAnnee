@@ -82,15 +82,6 @@ public class PlayerController : MonoBehaviour
             {
                 Movementx = Inputx;
             }
-
-            /*if (Inputy != 0)
-            {
-                ActualSpeed = MaxSpeed * (Mathf.Sqrt(2) / 2);
-            }
-            else
-            {
-                ActualSpeed = MaxSpeed;
-            }*/
         }
         else if (Movementx >= 0.01f || Movementx <= -0.01f)
         {
@@ -134,7 +125,6 @@ public class PlayerController : MonoBehaviour
             {
                 IsJumping = false;
             }
-            //Gravity.enabled = false;
             Jump();
         }
 
