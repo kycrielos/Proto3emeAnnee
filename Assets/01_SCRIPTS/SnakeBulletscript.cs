@@ -10,11 +10,17 @@ public class SnakeBulletscript : MonoBehaviour
     private PlayerController Player;
     bool DamageSecurity;
 
+    private Vector3 playerposition;
+
+    private void Start()
+    {
+        playerposition = target.position;
+    }
     // Update is called once per frame
     void Update()
     {
         float step = Speed * Time.deltaTime * 2;
-        transform.position = Vector3.MoveTowards(transform.position, target.position, step);
+        transform.position = Vector3.MoveTowards(transform.position, playerposition, step);
     }
 
     private void OnCollisionEnter(Collision other)
