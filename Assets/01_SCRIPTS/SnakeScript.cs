@@ -49,14 +49,13 @@ public class SnakeScript : MonoBehaviour
     }
     public void AI()
     {
+        Debug.DrawLine(Head.position, player.position, Color.white);
         if (!AspirationOn)
         {
             CdTimer += Time.deltaTime;
-            RaycastHit hit;
-            if (CdTimer > Cooldown && Physics.Raycast(Head.position, player.position - Head.position, out hit, Mathf.Infinity))
+            if (CdTimer > Cooldown && Physics.Linecast(Head.position, player.position, out RaycastHit hitinfo))
             {
-                Debug.DrawRay(Head.position, (player.position-Head.position) * hit.distance, Color.yellow);
-                if (hit.collider.name == "Player")
+                if (hitinfo.collider.tag == "Player")
                 {
                     if (target != null)
                     {

@@ -18,11 +18,9 @@ public class AspirationTriggerScript : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        RaycastHit hit;
-        if (Physics.Raycast(Head.position, player.position - Head.position, out hit, Mathf.Infinity))
+        if (Physics.Raycast(Head.position, player.position - Head.position, out RaycastHit hitinfo))
         {
-            Debug.DrawRay(Head.position, (player.position - Head.position) * hit.distance, Color.red);
-            if (hit.collider.name == "Player")
+            if (hitinfo.collider.tag == "Player")
             {
                 PlayerVisible = true;
             }
