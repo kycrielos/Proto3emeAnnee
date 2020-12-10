@@ -90,7 +90,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4358673155812238915}
   - component: {fileID: 893285783244356090}
-  - component: {fileID: 4312359851589100435}
   m_Layer: 0
   m_Name: Cube
   m_TagString: MovablePlateform
@@ -125,19 +124,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4312359851589100435
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2800264525560911577}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cefeefa4388a7e544b856641556ee10f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rb: {fileID: 0}
 --- !u!1 &9175611706410840265
 GameObject:
   m_ObjectHideFlags: 0
