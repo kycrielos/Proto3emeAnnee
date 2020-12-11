@@ -31,9 +31,11 @@ Material:
     m_Floats:
     - _Depth: -0.1
     - _Displacement: 0.11
+    - _FoamAmount: 0
     - _NormalStrength: 0.78
+    - _RoamCutoff: 0.5
     - _Smoothness: 0.66
     - _Strength: 0.9
     m_Colors:
-    - _DeepColor: {r: 0.6117647, g: 0.54241365, b: 0.2901961, a: 0.6509804}
-    - _Shallowcolor: {r: 0.21960782, g: 0.8117647, b: 0.7450247, a: 0.2784314}
+    - _DeepColor: {r: 0.6792453, g: 0.5842979, b: 0.24670699, a: 0.6392157}
+    - _Shallowcolor: {r: 0.19272871, g: 0.6698113, b: 0.44989672, a: 0.69411767}
