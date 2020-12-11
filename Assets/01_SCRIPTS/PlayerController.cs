@@ -49,6 +49,8 @@ public class PlayerController : MonoBehaviour
     public float GravityForce = 9.87f;
     float turnSmoothVelocity;
     public float turnSmoothTime = 0.1f;
+
+    public bool CantMove;
     // Start is called before the first frame update
     void Start()
     {
@@ -61,9 +63,12 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        IsDead();
-        PlayerMovement();
-        FallingDamage();
+        if (!CantMove)
+        {
+            IsDead();
+            PlayerMovement();
+            FallingDamage();
+        }
     }
 
     void PlayerMovement()

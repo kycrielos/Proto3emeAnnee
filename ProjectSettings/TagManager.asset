@@ -9,6 +9,8 @@ TagManager:
   - Fire
   - BulletTrigger
   - Checkpoint
+  - Cristal
+  - CristalDoor
   layers:
   - Default
   - TransparentFX
@@ -18,7 +20,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Test
   - 
   - 
   - 
