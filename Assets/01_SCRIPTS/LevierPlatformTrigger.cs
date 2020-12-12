@@ -10,6 +10,9 @@ public class LevierPlatformTrigger : MonoBehaviour
     public bool SerpentTrigger;
     public GameObject Serpent;
 
+    public GameObject Pos1;
+    public GameObject Pos2;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player" && !Activated)
@@ -18,6 +21,8 @@ public class LevierPlatformTrigger : MonoBehaviour
             {
                 Platform.LevierNumber += 1;
                 Activated = true;
+                Pos1.SetActive(false);
+                Pos2.SetActive(true);
                 if (SerpentTrigger)
                 {
                     Serpent.SetActive(true);
@@ -33,6 +38,8 @@ public class LevierPlatformTrigger : MonoBehaviour
             {
                 Platform.LevierNumber += 1;
                 Activated = true;
+                Pos1.SetActive(false);
+                Pos2.SetActive(true);
                 if (SerpentTrigger)
                 {
                     Serpent.SetActive(true);

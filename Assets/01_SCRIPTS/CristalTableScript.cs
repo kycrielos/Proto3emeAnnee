@@ -34,6 +34,8 @@ public class CristalTableScript : MonoBehaviour
             CamScript.m_XAxis.m_InputAxisName = "Mouse X";
             if (Activated)
             {
+                Player.GetComponent<CharacterController>().enabled = false;
+                Player.GetComponent<MeshRenderer>().enabled = false;
                 Player.transform.position = new Vector3(CamTransform.position.x, Player.transform.position.y, CamTransform.position.z);
                 if (Input.GetButtonDown("Action"))
                 {
