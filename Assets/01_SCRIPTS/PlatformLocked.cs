@@ -6,12 +6,14 @@ public class PlatformLocked : MonoBehaviour
 {
     public PlaterformMovementVerticalScript Platform;
     public int LevierNumber;
+    public bool Unlock;
 
     // Update is called once per frame
     void Update()
     {
         if (LevierNumber > 1)
         {
+            Unlock = true;
             Platform.enabled = true;
         }
     }

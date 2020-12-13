@@ -699,6 +699,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3361658303149640647}
   - component: {fileID: 3361658303149640644}
+  - component: {fileID: 4225993484219791716}
   m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
@@ -737,6 +738,19 @@ MonoBehaviour:
   FollowTarget: {fileID: 5190147958810740799}
   speed: 0
   Snake: {fileID: 1139752556371181866}
+--- !u!65 &4225993484219791716
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3361658303149640645}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.5, y: 4.5, z: 0.45}
+  m_Center: {x: 0, y: 1, z: -1}
 --- !u!1 &6675417813996144663
 GameObject:
   m_ObjectHideFlags: 0

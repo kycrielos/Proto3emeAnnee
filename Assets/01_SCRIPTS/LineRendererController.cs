@@ -9,6 +9,7 @@ public class LineRendererController : MonoBehaviour
     public CristalRotate NextCristal;
     private float timer;
     private float desactivationduration = 0.2f;
+    public GameObject WinScreen;
     // Start is called before the first frame update
     void Start()
     {
@@ -43,6 +44,13 @@ public class LineRendererController : MonoBehaviour
                 if (hit.collider.tag == "CristalDoor")
                 {
                     hit.collider.GetComponentInParent<LockedDoorScript>().Unlocked = true;
+                }
+                else if (hit.collider.tag == ("SnakeHead"))
+                {
+                    if (WinScreen != null)
+                    {
+                        WinScreen.SetActive(true);
+                    }
                 }
             }
         }

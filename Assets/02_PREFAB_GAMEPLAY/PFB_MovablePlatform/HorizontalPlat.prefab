@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1118780599848030599}
   - component: {fileID: 8027996627033616796}
   - component: {fileID: 6218291986671385274}
+  - component: {fileID: 2616183343684577802}
   m_Layer: 0
   m_Name: Phantome
   m_TagString: MovablePlateform
@@ -80,6 +81,18 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &2616183343684577802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 997898941886266721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b97bab16580c90846a0b0c4c25a92978, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2800264525560911577
 GameObject:
   m_ObjectHideFlags: 0
