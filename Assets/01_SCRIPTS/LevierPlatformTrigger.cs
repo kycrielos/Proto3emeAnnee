@@ -12,17 +12,24 @@ public class LevierPlatformTrigger : MonoBehaviour
 
     public GameObject Pos1;
     public GameObject Pos2;
-
+    public GameObject Text;
+    
+    private void Awake()
+    {
+        Text = GameObject.Find("Ui_Press_E");
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player" && !Activated)
         {
+            Text.SetActive(true);
             if (Input.GetButtonDown("Action"))
             {
                 Platform.LevierNumber += 1;
                 Activated = true;
                 Pos1.SetActive(false);
                 Pos2.SetActive(true);
+                Text.SetActive(false);
                 if (SerpentTrigger)
                 {
                     Serpent.SetActive(true);
@@ -40,11 +47,19 @@ public class LevierPlatformTrigger : MonoBehaviour
                 Activated = true;
                 Pos1.SetActive(false);
                 Pos2.SetActive(true);
+                Text.SetActive(false);
                 if (SerpentTrigger)
                 {
                     Serpent.SetActive(true);
                 }
             }
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            Text.SetActive(false);
         }
     }
 }
