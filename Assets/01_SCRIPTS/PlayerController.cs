@@ -51,6 +51,8 @@ public class PlayerController : MonoBehaviour
     public float turnSmoothTime = 0.1f;
 
     public bool CantMove;
+
+    public GameObject[] VieSprite;
     // Start is called before the first frame update
     void Start()
     {
@@ -68,6 +70,28 @@ public class PlayerController : MonoBehaviour
             IsDead();
             PlayerMovement();
             FallingDamage();
+        }
+    }
+
+    private void LateUpdate()
+    {
+        switch (HP)
+        {
+            case 3:
+                VieSprite[0].SetActive(true);
+                VieSprite[1].SetActive(true);
+                VieSprite[2].SetActive(true);
+                break;
+            case 2:
+                VieSprite[0].SetActive(true);
+                VieSprite[1].SetActive(true);
+                VieSprite[2].SetActive(false);
+                break;
+            case 1:
+                VieSprite[0].SetActive(true);
+                VieSprite[1].SetActive(false);
+                VieSprite[2].SetActive(false);
+                break;
         }
     }
 

@@ -10,14 +10,16 @@ public class CristalTableScript : MonoBehaviour
     public Transform CamTransform;
     private float timer;
     public float delay;
-    private float Ymaxspeed;
-    private float Xmaxspeed;
+    public GameObject Text;
 
-    private void Start()
+    private void Awake()
     {
         Player = GameObject.Find("Player");
-        Ymaxspeed = CamScript.m_YAxis.m_MaxSpeed;
-        Xmaxspeed = CamScript.m_XAxis.m_MaxSpeed;
+        Text = GameObject.Find("Ui_Press_E");
+    }
+    private void Start()
+    {
+        Text.SetActive(false);
     }
 
     private void Update()
@@ -57,12 +59,17 @@ public class CristalTableScript : MonoBehaviour
         {
             if (!Activated)
             {
+                Text.SetActive(false);
                 CamScript.Priority = 11;
                 Activated = true;
                 timer = 0;
                 Player.GetComponent<CharacterController>().enabled = false;
                 Player.GetComponent<MeshRenderer>().enabled = false;
             }
+        }
+        else if (other.gameObject.tag == "Player")
+        {
+            Text.SetActive(true);
         }
     }
     private void OnTriggerStay(Collider other)
@@ -71,12 +78,20 @@ public class CristalTableScript : MonoBehaviour
         {
             if (!Activated)
             {
+                Text.SetActive(false);
                 CamScript.Priority = 11;
                 Activated = true;
                 timer = 0;
                 Player.GetComponent<CharacterController>().enabled = false;
                 Player.GetComponent<MeshRenderer>().enabled = false;
             }
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            Text.SetActive(false);
         }
     }
 }
