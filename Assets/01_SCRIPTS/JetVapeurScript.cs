@@ -13,6 +13,7 @@ public class JetVapeurScript : MonoBehaviour
     private float ActiveTimer;
     public float ActiveDelay;
 
+
     private void Update()
     {
         ActiveTimer += Time.deltaTime;
@@ -44,7 +45,9 @@ public class JetVapeurScript : MonoBehaviour
             TickTimer += Time.deltaTime;
             if (TickTimer >= 1 / TickPerSecond)
             {
-                other.GetComponent<PlayerController>().HP -= DamagePerTick;
+                other.GetComponent<PlayerController>().Damage += DamagePerTick;
+                other.GetComponent<PlayerController>().Damaged();
+
                 TickTimer = 0;
             }
         }

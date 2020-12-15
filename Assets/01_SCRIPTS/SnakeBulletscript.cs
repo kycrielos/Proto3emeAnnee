@@ -30,6 +30,7 @@ public class SnakeBulletscript : MonoBehaviour
             Player = other.gameObject.GetComponent<PlayerController>();
             DamageSecurity = true;
             Player.Damage += Damage;
+            Player.Damaged();
         }
         Destroy(this.gameObject);
     }

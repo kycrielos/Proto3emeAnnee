@@ -42,7 +42,8 @@ public class AspirationTriggerScript : MonoBehaviour
             AspirationTickTimer += Time.deltaTime;
             if (AspirationTickTimer >= 1 / AspirationTickPerSecond)
             {
-                other.GetComponent<PlayerController>().HP -= AspirationDamagePerTick;
+                other.GetComponent<PlayerController>().Damage += AspirationDamagePerTick;
+                other.GetComponent<PlayerController>().Damaged();
                 AspirationTickTimer = 0;
             }
         }

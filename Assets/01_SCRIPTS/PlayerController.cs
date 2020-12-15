@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
-
 {
     //Input
     private float Inputx;
@@ -52,7 +52,13 @@ public class PlayerController : MonoBehaviour
 
     public bool CantMove;
 
-    public GameObject[] VieSprite;
+    public Image VieSprite;
+
+    private float timerDamage;
+    private float RedDuration = 0.5f;
+
+    private float deathDelayTimer;
+    private float deathDelay = 0.5f;
     // Start is called before the first frame update
     void Start()
     {
@@ -65,33 +71,21 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!CantMove)
+        if (!CantMove && HP > 0)
         {
-            IsDead();
             PlayerMovement();
             FallingDamage();
         }
+        IsDead();
+        timerDamage += Time.deltaTime;
     }
 
     private void LateUpdate()
     {
-        switch (HP)
+        VieSprite.fillAmount = HP / MaxHP;
+        if (timerDamage >= RedDuration)
         {
-            case 3:
-                VieSprite[0].SetActive(true);
-                VieSprite[1].SetActive(true);
-                VieSprite[2].SetActive(true);
-                break;
-            case 2:
-                VieSprite[0].SetActive(true);
-                VieSprite[1].SetActive(true);
-                VieSprite[2].SetActive(false);
-                break;
-            case 1:
-                VieSprite[0].SetActive(true);
-                VieSprite[1].SetActive(false);
-                VieSprite[2].SetActive(false);
-                break;
+            GetComponent<Renderer>().material.color = Color.gray;
         }
     }
 
@@ -212,11 +206,16 @@ public class PlayerController : MonoBehaviour
     {
         if (HP <= 0)
         {
-            GetComponent<CharacterController>().enabled = false;
-            transform.position = Spawnpoint.position;
-            transform.rotation = Spawnpoint.rotation;
-            HP = MaxHP;
-            GetComponent<CharacterController>().enabled = true;
+            deathDelayTimer += Time.deltaTime;
+            if (deathDelayTimer > deathDelay)
+            {
+                GetComponent<CharacterController>().enabled = false;
+                transform.position = Spawnpoint.position;
+                transform.rotation = Spawnpoint.rotation;
+                HP = MaxHP;
+                GetComponent<CharacterController>().enabled = true;
+                deathDelayTimer = 0;
+            }
         }
     }
 
@@ -233,10 +232,13 @@ public class PlayerController : MonoBehaviour
             {
                 Damage += MinimumDamagePerTick * Mathf.Round(FallingDuration * SecondPerTick);
                 FallingDuration -= 1 / SecondPerTick;
-                Debug.Log(Damage);
+            }
+
+            if (FallingDuration > 0 && Damage > 0)
+            {
+                Damaged();
             }
             FallingDuration = 0;
-            Damaged();
         }
     }
 
@@ -244,6 +246,8 @@ public class PlayerController : MonoBehaviour
     {
         HP -= Damage;
         Damage = 0;
+        GetComponent<Renderer>().material.color = Color.red;
+        timerDamage = 0;
     }
 
     private void OnCollisionStay(Collision collision)

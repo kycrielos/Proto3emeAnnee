@@ -24,6 +24,11 @@ public class SnakeScript : MonoBehaviour
     private float CdTimer;
     public Transform Head;
 
+    private float delayTimer;
+    public float Delay;
+
+    public GameObject DelayFeedBack;
+
     // Update is called once per frame
     void Update()
     {
@@ -57,14 +62,26 @@ public class SnakeScript : MonoBehaviour
             {
                 if (hitinfo.collider.tag == "Player")
                 {
-                    if (target != null)
+                    DelayFeedBack.SetActive(true);
+                    delayTimer += Time.deltaTime;
+                    if (delayTimer >= Delay)
                     {
-                        ShootOn = true;
+                        DelayFeedBack.SetActive(false);
+                        if (target != null)
+                        {
+                            ShootOn = true;
+                        }
+                        else
+                        {
+                            AspirationOn = true;
+                        }
+                        delayTimer = 0;
                     }
-                    else
-                    {
-                        AspirationOn = true;
-                    }
+                }
+                else
+                {
+                    delayTimer = 0;
+                    DelayFeedBack.SetActive(false);
                 }
             }
         }
