@@ -8,6 +8,7 @@ public class CristalRotate : MonoBehaviour
     public float speed;
     public GameObject Rayon;
     public bool ActiveRayon;
+    public GameObject Fx;
 
     // Update is called once per frame
     void Update()
@@ -16,10 +17,12 @@ public class CristalRotate : MonoBehaviour
         transform.rotation = Quaternion.LookRotation(Vector3.RotateTowards(transform.forward, Cam.position-transform.position, step, 0));
         if (ActiveRayon)
         {
+            Fx.SetActive(true);
             Rayon.SetActive(true);
         }
         else
         {
+            Fx.SetActive(false);
             Rayon.SetActive(false);
         }
     }

@@ -29,6 +29,9 @@ public class SnakeScript : MonoBehaviour
 
     public GameObject DelayFeedBack;
 
+    public GameObject SFX_Prev;
+    public AudioSource SFX_Crachat;
+
     // Update is called once per frame
     void Update()
     {
@@ -62,13 +65,16 @@ public class SnakeScript : MonoBehaviour
             {
                 if (hitinfo.collider.tag == "Player")
                 {
+                    SFX_Prev.SetActive(true);
                     DelayFeedBack.SetActive(true);
                     delayTimer += Time.deltaTime;
                     if (delayTimer >= Delay)
                     {
+                        SFX_Prev.SetActive(false);
                         DelayFeedBack.SetActive(false);
                         if (target != null)
                         {
+                            SFX_Crachat.Play();
                             ShootOn = true;
                         }
                         else
@@ -82,6 +88,7 @@ public class SnakeScript : MonoBehaviour
                 {
                     delayTimer = 0;
                     DelayFeedBack.SetActive(false);
+                    SFX_Prev.SetActive(false);
                 }
             }
         }

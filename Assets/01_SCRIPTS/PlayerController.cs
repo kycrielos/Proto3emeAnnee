@@ -59,6 +59,9 @@ public class PlayerController : MonoBehaviour
 
     private float deathDelayTimer;
     private float deathDelay = 0.5f;
+
+    public ParticleSystem Dust;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -197,6 +200,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetButtonDown("Jump"))
         {
+            CreateDust();
             IsJumping = true;
             JumpActualForce = JumpForce;
         }
@@ -228,6 +232,10 @@ public class PlayerController : MonoBehaviour
 
         if (controller.isGrounded)
         {
+            if (FallingDuration >= (1 / SecondPerTick)/2)
+            {
+                CreateDust();
+            }
             while (FallingDuration >= 1 / SecondPerTick)
             {
                 Damage += MinimumDamagePerTick * Mathf.Round(FallingDuration * SecondPerTick);
@@ -285,5 +293,9 @@ public class PlayerController : MonoBehaviour
         {
             Spawnpoint = other.GetComponentInChildren<Transform>();
         }
+    }
+    void CreateDust()
+    {
+        Dust.Play();
     }
 }

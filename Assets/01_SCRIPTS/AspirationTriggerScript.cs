@@ -4,47 +4,23 @@ using UnityEngine;
 
 public class AspirationTriggerScript : MonoBehaviour
 {
-    public float AspirationTickPerSecond;
-    public float AspirationDamagePerTick;
-    private float AspirationTickTimer;
-
     public Transform Head;
-    private bool PlayerVisible;
     public Transform player;
+
+    public float Force;
 
     private void Start()
     {
         player = GetComponentInParent<SnakeHeadScript>().player;
     }
-    private void FixedUpdate()
-    {
-        if (Physics.Raycast(Head.position, player.position - Head.position, out RaycastHit hitinfo))
-        {
-            if (hitinfo.collider.tag == "Player")
-            {
-                PlayerVisible = true;
-            }
-            else
-            {
-                PlayerVisible = false;
-            }
-        }
-        else
-        {
-            PlayerVisible = false;
-        }
-    }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Player" && PlayerVisible)
+        if (Physics.Linecast(Head.position, player.position, out RaycastHit hitinfo))
         {
-            AspirationTickTimer += Time.deltaTime;
-            if (AspirationTickTimer >= 1 / AspirationTickPerSecond)
+            if (hitinfo.collider.tag == "Player")
             {
-                other.GetComponent<PlayerController>().Damage += AspirationDamagePerTick;
-                other.GetComponent<PlayerController>().Damaged();
-                AspirationTickTimer = 0;
+                player.GetComponent<PlayerController>().controller.Move(-Head.forward * Force * Time.deltaTime);
             }
         }
     }
