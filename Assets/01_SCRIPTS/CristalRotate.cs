@@ -9,6 +9,7 @@ public class CristalRotate : MonoBehaviour
     public GameObject Rayon;
     public bool ActiveRayon;
     public GameObject Fx;
+    public AudioSource SFX_CristalHit;
 
     // Update is called once per frame
     void Update()
@@ -18,6 +19,7 @@ public class CristalRotate : MonoBehaviour
         if (ActiveRayon)
         {
             Fx.SetActive(true);
+            SFX_CristalHit.Play();
             Rayon.SetActive(true);
         }
         else
