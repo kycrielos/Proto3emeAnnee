@@ -8,6 +8,8 @@ public class LevierTrigger : MonoBehaviour
     public GameObject Pos2;
     public LockedDoorScript Door;
     public GameObject Text;
+    public AudioSource SFX_Levier;
+
     private void Awake()
     {
         Text = GameObject.Find("Ui_Press_E");
