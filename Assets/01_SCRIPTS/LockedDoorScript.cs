@@ -9,6 +9,11 @@ public class LockedDoorScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Activation();
+    }
+
+    void Activation()
+    {
         if (Unlocked)
         {
             this.gameObject.SetActive(false);

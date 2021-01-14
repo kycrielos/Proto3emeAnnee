@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6011041661874105974
 Transform:
   m_ObjectHideFlags: 0
@@ -42,16 +42,16 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: bad82f9636241a149b945c973f25dadc, type: 3}
-  m_PlayOnAwake: 0
+  m_PlayOnAwake: 1
   m_Volume: 0.1
   m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 132
   DopplerLevel: 1
-  MinDistance: 100
+  MinDistance: 0
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -151,7 +151,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5110175623139509764}
-  m_LocalRotation: {x: 0.0258369, y: -0.019213693, z: 0.0004966799, w: 0.9994814}
+  m_LocalRotation: {x: 0.0258369, y: -0.019213691, z: 0.00049667974, w: 0.9994814}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2457,7 +2457,8 @@ MonoBehaviour:
   Rayon: {fileID: 5110175624514846731}
   ActiveRayon: 0
   Fx: {fileID: 8432652602906951865}
-  SFX_CristalHit: {fileID: 6522482859452067531}
+  SFX_CristalHit: {fileID: 3401822187088329248}
+  IsFirst: 0
 --- !u!135 &5110175623241076093
 SphereCollider:
   m_ObjectHideFlags: 0

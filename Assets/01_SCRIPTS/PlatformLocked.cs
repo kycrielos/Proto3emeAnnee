@@ -11,6 +11,11 @@ public class PlatformLocked : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Activation();
+    }
+
+    void Activation()
+    {
         if (LevierNumber > 1)
         {
             Unlock = true;

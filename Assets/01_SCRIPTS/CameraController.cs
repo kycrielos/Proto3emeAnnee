@@ -39,8 +39,4 @@ public class CameraController : MonoBehaviour
         //Gere la rotation
         transform.eulerAngles = new Vector3(Mousey, Mousex, 0);
     }
-    void FixedUpdate()
-    {
-       
-    }
 }

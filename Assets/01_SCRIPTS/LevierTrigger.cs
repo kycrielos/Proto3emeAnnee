@@ -26,6 +26,7 @@ public class LevierTrigger : MonoBehaviour
             if (Input.GetButtonDown("Action"))
             {
                 Door.Unlocked = true;
+                SFX_Levier.Play();
                 Pos1.SetActive(false);
                 Pos2.SetActive(true);
                 Text.SetActive(false);
@@ -39,6 +40,7 @@ public class LevierTrigger : MonoBehaviour
             if (Input.GetButtonDown("Action"))
             {
                 Door.Unlocked = true;
+                SFX_Levier.Play();
                 Pos1.SetActive(false);
                 Pos2.SetActive(true);
                 Text.SetActive(false);

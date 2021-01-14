@@ -248,7 +248,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 132
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 0
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -5575,8 +5575,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f32017e873ae2d94bb6f6624dbb7a548, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AspirationTickPerSecond: 1
-  AspirationDamagePerTick: 1
   Head: {fileID: 0}
   player: {fileID: 0}
   Force: 0

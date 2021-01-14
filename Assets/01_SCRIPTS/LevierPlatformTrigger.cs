@@ -14,6 +14,8 @@ public class LevierPlatformTrigger : MonoBehaviour
     public GameObject Pos2;
     public GameObject Text;
     
+    public AudioSource SFX;
+
     private void Awake()
     {
         Text = GameObject.Find("Ui_Press_E");
@@ -25,6 +27,7 @@ public class LevierPlatformTrigger : MonoBehaviour
             Text.SetActive(true);
             if (Input.GetButtonDown("Action"))
             {
+                SFX.Play();
                 Platform.LevierNumber += 1;
                 Activated = true;
                 Pos1.SetActive(false);
@@ -43,6 +46,7 @@ public class LevierPlatformTrigger : MonoBehaviour
         {
             if (Input.GetButtonDown("Action"))
             {
+                SFX.Play();
                 Platform.LevierNumber += 1;
                 Activated = true;
                 Pos1.SetActive(false);

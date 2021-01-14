@@ -9,7 +9,9 @@ public class CristalRotate : MonoBehaviour
     public GameObject Rayon;
     public bool ActiveRayon;
     public GameObject Fx;
-    public AudioSource SFX_CristalHit;
+    public GameObject SFX_CristalHit;
+
+    public bool IsFirst;
 
     // Update is called once per frame
     void Update()
@@ -18,8 +20,11 @@ public class CristalRotate : MonoBehaviour
         transform.rotation = Quaternion.LookRotation(Vector3.RotateTowards(transform.forward, Cam.position-transform.position, step, 0));
         if (ActiveRayon)
         {
+            if (!IsFirst)
+            {
+                SFX_CristalHit.SetActive(true);
+            }
             Fx.SetActive(true);
-            SFX_CristalHit.Play();
             Rayon.SetActive(true);
         }
         else
